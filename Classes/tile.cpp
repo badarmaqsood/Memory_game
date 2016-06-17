@@ -33,6 +33,8 @@ bool tile::init(Vec2 start, Vec2 end, Label* label, int num)
     block->drawSolidRect(Vec2::ZERO, Vec2(kTileWidth,kTileWidth), Color4F(0.8,0.8,0.8,1.0));
     this->setContentSize(Size(kTileWidth,kTileWidth));
     
+    
+    
     this->addChild(block,10);
     __String* number= __String::create(std::to_string(num));
     __Dictionary* dic = __Dictionary::createWithContentsOfFile("data.plist");
@@ -52,7 +54,7 @@ bool tile::init(Vec2 start, Vec2 end, Label* label, int num)
     this->set_index(num);
     this->setvalue(val);
 
-    GameController::get_instance()->add_tile(this);
+   
     return true;
 }
 
@@ -95,11 +97,10 @@ bool tile::onTouchBegan(Touch *touch, Event* event)
         std::string s = std::to_string(num);
        // log(s.c_str());
 
+            GameController::get_instance()->tile_pressed(this);
         
-        GameController::get_instance()->tile_pressed(this,block);
         
         
-        this->scheduleOnce(schedule_selector(tile::myModification), 1.0f);
         
         //this->addChild(block);
         
@@ -110,7 +111,3 @@ bool tile::onTouchBegan(Touch *touch, Event* event)
     return true;
 }
 
-void tile::myModification(float dt)
-{
-    block->setVisible(true);
-}

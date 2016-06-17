@@ -23,13 +23,14 @@ class GameController : public cocos2d::Node
 private:
     GameController();
     static GameController* instance;
-    __Array* tiles;
+   __Array* tiles;
     
 public:
    static GameController* get_instance();
     
-    void tile_pressed(tile* tile,Node * block);
-    void add_tile(tile * tile);
+    void tile_pressed(tile* tile_pressed);
+    void wait_for_it(float dt);
+    int count;
     
     
     
